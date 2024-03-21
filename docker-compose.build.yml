@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  nn_backend:
+    build:
+      context: ./NN_backend
+      dockerfile: Dockerfile
+      #tags: 
+        #- "test1repo.azurecr.io/nn_backend:1" # Add your desired tag here 
+    #image: test1repo.azurecr.io/nn_backend:1
+    ports:
+      - "8080:8080"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+ 
+  react_app:
+    build: 
+      context: ./react_app
+      dockerfile: Dockerfile
+      #tags: 
+       # - "test1repo.azurecr.io/react_app:1" # Add your desired tag here 
+    #image: test1repo.azurecr.io/react_app:1
+    ports:
+      - "3000:3000"
+    depends_on:
+      - nn_backend
+#docker-compose -f docker-compose.build.yml build
