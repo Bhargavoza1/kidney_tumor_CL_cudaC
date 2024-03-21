@@ -34,4 +34,4 @@ jobs:
         run: |
           docker build ./react_app -t test1repo.azurecr.io/react_app:1
         # docker push test1repo.azurecr.io/react_app:1
-        needs: build
+     
