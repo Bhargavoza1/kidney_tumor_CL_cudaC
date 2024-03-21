@@ -1,0 +1,37 @@
+name: CUDA Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      nn_backend:
+        image: nvidia/cuda:12.3.2-devel-ubuntu22.04
+        ports:
+          - "8080:8080"
+        options: --privileged  # Required for GPU access
+        env:
+          NVIDIA_VISIBLE_DEVICES: all
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Build and deploy nn_backend
+        run: |
+          docker build ./NN_backend -t test1repo.azurecr.io/nn_backend:1
+        # docker push test1repo.azurecr.io/nn_backend:1
+
+      - name: Build and deploy react_app
+        run: |
+          docker build ./react_app -t test1repo.azurecr.io/react_app:1
+        # docker push test1repo.azurecr.io/react_app:1
+        needs: build
