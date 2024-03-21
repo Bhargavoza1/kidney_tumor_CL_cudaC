@@ -1,2 +1,2 @@
-# kidny_tumor_CL_cudaC
+# kidney tumor classification with cuda C++
  
