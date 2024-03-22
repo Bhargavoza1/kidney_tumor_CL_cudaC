@@ -27,6 +27,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
       - name: Login to Azure Container Registry
         uses: azure/docker-login@v1
         with:
