@@ -17,13 +17,13 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
-      nn_backend:
-        image: nvidia/cuda:12.3.2-devel-ubuntu22.04
-        ports:
-          - "8080:8080"
-        options: --privileged  # Required for GPU access
-        env:
-          NVIDIA_VISIBLE_DEVICES: all
+      #nn_backend:
+      #  image: nvidia/cuda:12.3.2-devel-ubuntu22.04
+      #  ports:
+      #    - "8080:8080"
+      #  options: --privileged  # Required for GPU access
+      #  env:
+      #    NVIDIA_VISIBLE_DEVICES: all
 
     steps:
       - name: Checkout repository
@@ -43,10 +43,10 @@ jobs:
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
 
-      - name: Build and deploy nn_backend
-        run: | 
-          docker build ./NN_backend -t test1repo.azurecr.io/nn_backend:${GITHUB_RUN_NUMBER}
-          docker push test1repo.azurecr.io/nn_backend:${GITHUB_RUN_NUMBER}
+     # - name: Build and deploy nn_backend
+     #   run: | 
+     #     docker build ./NN_backend -t test1repo.azurecr.io/nn_backend:${GITHUB_RUN_NUMBER}
+     #     docker push test1repo.azurecr.io/nn_backend:${GITHUB_RUN_NUMBER}
 
       - name: Build and deploy react_app
         run: |
@@ -55,7 +55,9 @@ jobs:
  
  
       - name: Check if AKS Cluster exists
+        uses: azure/CLI@v1
         run: |
+          azcliversion: latest
           exists=$(az aks show --resource-group my_test --name myAKSCluster --query 'id' -o tsv 2>/dev/null)
           if [ -z "$exists" ]; then
             echo "::set-output name=cluster_exists::false"
