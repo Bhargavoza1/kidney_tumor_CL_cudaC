@@ -56,7 +56,8 @@ jobs:
  
       - name: Check if AKS Cluster exists
         uses: azure/CLI@v1
-        with: |
+        with:
+          azcliversion: latest
           inlineScript: |
             exists=$(az aks show --resource-group my_test --name myAKSCluster --query 'id' -o tsv 2>/dev/null)
             if [ -z "$exists" ]; then
