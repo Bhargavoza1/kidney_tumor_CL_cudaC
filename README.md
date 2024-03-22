@@ -1,2 +1,2 @@
-# kidney tumor classification with cuda C++
+# end to end kidney tumor classification with cuda C++
  
