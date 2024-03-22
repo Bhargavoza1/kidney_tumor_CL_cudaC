@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: react-app
+  template:
+    metadata:
+      labels:
+        app: react-app
+    spec:
+      containers:
+      - name: react-app
+        image: react:1  # Replace with your image name
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            cpu: "1"
+            memory: "512Mi"  # Adjust according to your application needs
+        env:
+          - name: REACT_APP_BACKEND_URL
+            value: "http://nn-backend:8080"  # Set the backend URL
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+#kubectl port-forward service/react-app-service 8080:80

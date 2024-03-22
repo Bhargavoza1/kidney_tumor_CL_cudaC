@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nn-backend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nn-backend
+  template:
+    metadata:
+      labels:
+        app: nn-backend
+    spec:
+      containers:
+      - name: nn-backend
+        image: nn:1  # Replace with your image name
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            nvidia.com/gpu: 1

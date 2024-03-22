@@ -58,6 +58,8 @@ RUN cd /app/opencv && \
           -D BUILD_opencv_video=OFF \
           -D BUILD_opencv_videoio=OFF \
           -D WITH_GTK=OFF \
+          -D BUILD_opencv_dnn=OFF \
+          -D BUILD_opencv_gapi=OFF \
           -D WITH_EIGEN=OFF ..
 
 
