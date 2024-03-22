@@ -27,13 +27,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Login to Azure Container Registry
+        uses: azure/docker-login@v1
+        with:
+          login-server: test1repo.azurecr.io
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
       - name: Build and deploy nn_backend
         run: |
           docker build ./NN_backend -t test1repo.azurecr.io/nn_backend:1
-        # docker push test1repo.azurecr.io/nn_backend:1
+          docker push test1repo.azurecr.io/nn_backend:1
 
       - name: Build and deploy react_app
         run: |
           docker build ./react_app -t test1repo.azurecr.io/react_app:1
-        # docker push test1repo.azurecr.io/react_app:1
-     
+          docker push test1repo.azurecr.io/react_app:1
