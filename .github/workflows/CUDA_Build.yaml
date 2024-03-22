@@ -56,14 +56,15 @@ jobs:
  
       - name: Check if AKS Cluster exists
         uses: azure/CLI@v1
-        run: |
+        with: |
           azcliversion: latest
-          exists=$(az aks show --resource-group my_test --name myAKSCluster --query 'id' -o tsv 2>/dev/null)
-          if [ -z "$exists" ]; then
-            echo "::set-output name=cluster_exists::false"
-          else
-            echo "::set-output name=cluster_exists::true"
-          fi
+          inlineScript: |
+            exists=$(az aks show --resource-group my_test --name myAKSCluster --query 'id' -o tsv 2>/dev/null)
+            if [ -z "$exists" ]; then
+              echo "::set-output name=cluster_exists::false"
+            else
+              echo "::set-output name=cluster_exists::true"
+            fi
 
       - name: Create AKS Cluster
         if: steps.Check_if_AKS_Cluster_exists.outputs.cluster_exists == 'false'
