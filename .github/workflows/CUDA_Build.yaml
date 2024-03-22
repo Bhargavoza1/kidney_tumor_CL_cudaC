@@ -55,17 +55,16 @@ jobs:
  
  
       - name: Check if AKS Cluster exists
-          id: check_aks
-          run: |
-            exists=$(az aks show --resource-group my_test --name myAKSCluster --query 'id' -o tsv 2>/dev/null)
-            if [ -z "$exists" ]; then
-              echo "::set-output name=cluster_exists::false"
-            else
-              echo "::set-output name=cluster_exists::true"
-            fi
+        run: |
+          exists=$(az aks show --resource-group my_test --name myAKSCluster --query 'id' -o tsv 2>/dev/null)
+          if [ -z "$exists" ]; then
+            echo "::set-output name=cluster_exists::false"
+          else
+            echo "::set-output name=cluster_exists::true"
+          fi
 
       - name: Create AKS Cluster
-        if: steps.check_aks.outputs.cluster_exists == 'false'
+        if: steps.Check_if_AKS_Cluster_exists.outputs.cluster_exists == 'false'
         run: az aks create --resource-group my_test --name myAKSCluster --node-count 1 --enable-addons monitoring --generate-ssh-keys
 
       - name: Get AKS Credentials
@@ -74,6 +73,6 @@ jobs:
       - name: Replace placeholders in Kubernetes YAML files
         run: |
           sed -i "s/\${GITHUB_RUN_NUMBER}/${GITHUB_RUN_NUMBER}/g" ./k82/react_app_Deployment.yaml 
-          
+
       - name: Deploy to AKS
         run: kubectl apply -f ./k82/react_app_Deployment.yaml -f ./k82/react_app_Service.yaml
