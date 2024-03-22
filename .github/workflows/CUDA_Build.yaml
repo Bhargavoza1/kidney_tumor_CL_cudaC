@@ -16,7 +16,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    services:
+    #services:
       #nn_backend:
       #  image: nvidia/cuda:12.3.2-devel-ubuntu22.04
       #  ports:
