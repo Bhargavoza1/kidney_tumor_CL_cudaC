@@ -59,8 +59,8 @@ jobs:
         with:
           azcliversion: latest
           inlineScript: |
-            result=$(az aks show --resource-group my_test --name myAKSCluster --query 'id' 2>/dev/null)
-            if [ -z "$result" ]; then
+            result=$(az aks show --resource-group my_test --name myAKSCluster 2>/dev/null | jq -e '.id' || true)
+            if [ "$result" == "null" ]; then
               echo "::set-output name=cluster_exists::false"
             else
               echo "::set-output name=cluster_exists::true"
