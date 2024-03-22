@@ -30,14 +30,14 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Azure Login
-        uses: azure/login@v1
+        uses: azure/login@v2
         with: 
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Login to Azure Container Registry
-        uses: azure/docker-login@v1
+        uses: azure/docker-login@v2
         with:
           login-server: test1repo.azurecr.io
           username: ${{ secrets.ACR_USERNAME }}
@@ -55,16 +55,12 @@ jobs:
  
  
       - name: Check if AKS Cluster exists
-        uses: azure/CLI@v1
+        uses: azure/CLI@v2
         with:
           azcliversion: latest
           inlineScript: |
-            exists=$(az aks show --resource-group my_test --name myAKSCluster --query 'id' -o tsv 2>/dev/null)
-            if [ -z "$exists" ]; then
-              echo "::set-output name=cluster_exists::false"
-            else
-              echo "::set-output name=cluster_exists::true"
-            fi
+            az aks show --resource-group my_test --name myAKSCluster --query 'id'  
+   
 
       - name: Create AKS Cluster
         if: steps.Check_if_AKS_Cluster_exists.outputs.cluster_exists == 'false'
