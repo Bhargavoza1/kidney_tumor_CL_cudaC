@@ -51,7 +51,7 @@ jobs:
       - name: Build and deploy react_app
         run: |
           docker build ./react_app -t test1repo.azurecr.io/react_app:${GITHUB_RUN_NUMBER}
-          docker push test1repo.azurecr.io/react_app:${GITHUB_RUN_NUMBER}
+        #  docker push test1repo.azurecr.io/react_app:${GITHUB_RUN_NUMBER}
  
  
       - name: Check if AKS Cluster exists
