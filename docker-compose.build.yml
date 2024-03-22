@@ -30,3 +30,5 @@ services:
     depends_on:
       - nn_backend
 #docker-compose -f docker-compose.build.yml build
+#to test locally 
+#docker-compose -f docker-compose.build.yml up

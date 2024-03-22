@@ -70,6 +70,8 @@ RUN cd opencv/build && make -j$(nproc) && make install && ldconfig
  
 ENV CPLUS_INCLUDE_PATH=/usr/local/include/opencv4:$CPLUS_INCLUDE_PATH
 
+RUN rm -rf /app/opencv
+
 RUN cd /app/cuda_nn && mkdir build && \
     cd build && \
     cmake .. && \
