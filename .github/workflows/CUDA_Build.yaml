@@ -90,8 +90,7 @@ jobs:
           azcliversion: latest
           inlineScript: |
             az aks create --resource-group my_test --name myAKSCluster --node-count 1  --generate-ssh-keys
-        else:
-          echo "AKS Cluster already exists, skipping creation."
+ 
 
       - name: Get AKS Credentials
         uses: azure/CLI@v2
