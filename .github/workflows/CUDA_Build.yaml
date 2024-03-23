@@ -12,9 +12,7 @@ on:
 permissions:
       id-token: write
       contents: read
-env:
-  IS_AKS_PRESENT: 
-
+ 
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -73,12 +71,13 @@ jobs:
             fi
 
             if [[ -z "$result" || "$result" == *"ResourceNotFound"* ]]; then
-              echo "cluster_exists=false" >> $IS_AKS_PRESENT
+              echo "cluster_exists=false" >> $GITHUB_OUTPUT
             else
-              echo "cluster_exists=true" >> $IS_AKS_PRESENT
+              echo "cluster_exists=true" >> $GITHUB_OUTPUT
             fi
 
-
+      - name: Print name
+        run: echo "checking value $steps.Check_if_AKS_Cluster_exists.outputs.cluster_exists"
    
 
       - name: Create AKS Cluster
