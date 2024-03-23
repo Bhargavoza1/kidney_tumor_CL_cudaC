@@ -117,7 +117,7 @@ jobs:
           sed -i "s/\${GITHUB_RUN_NUMBER}/${GITHUB_RUN_NUMBER}/g" react_app_Deployment.yaml
 
       - name: Deploy to AKS 
-        uses: azure/CLI@v2
+        uses: Azure/k8s-deploy@v5
         with:
           azcliversion: latest
           inlineScript: |
