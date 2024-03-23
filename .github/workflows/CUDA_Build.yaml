@@ -93,7 +93,7 @@ jobs:
           azcliversion: latest
           inlineScript: |
             if [ "${{steps.check-aks.outputs.cluster_exists}}" != "true" ]; then
-              az aks create --resource-group my_test --name myAKSCluster --node-count 1  --generate-ssh-keys
+              az aks create --resource-group my_test --name myAKSCluster --node-count 1  --generate-ssh-keys --attach-acr test1repo
             else
               echo "AKS cluster is present"
               ls
