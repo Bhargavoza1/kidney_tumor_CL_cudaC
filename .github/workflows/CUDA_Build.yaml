@@ -96,9 +96,9 @@ jobs:
             if [ "${{steps.check-aks.outputs.cluster_exists}}" != "true" ]; then
               az aks create --resource-group my_test --name myAKSCluster --node-count 1  --generate-ssh-keys  
               AKS_ID=$(az aks show --resource-group my_test --name myAKSCluster --query id -o tsv)
-	            ACR_ID=$(az acr show --name test1repo --query id --output tsv)
- 	            az role assignment create --assignee $AKS_ID --scope $ACR_ID --role AcrPull
-	            az aks update --resource-group my_test --name myAKSCluster --attach-acr test1repo
+	      ACR_ID=$(az acr show --name test1repo --query id --output tsv)
+ 	      az role assignment create --assignee $AKS_ID --scope $ACR_ID --role AcrPull
+	      az aks update --resource-group my_test --name myAKSCluster --attach-acr test1repo
             else
               echo "AKS cluster is present"
               ls
