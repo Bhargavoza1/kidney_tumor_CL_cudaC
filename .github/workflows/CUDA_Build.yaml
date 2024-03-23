@@ -96,6 +96,8 @@ jobs:
               az aks create --resource-group my_test --name myAKSCluster --node-count 1  --generate-ssh-keys
             else
               echo "AKS cluster is present"
+              ls
+              pwd
             fi
  
             
