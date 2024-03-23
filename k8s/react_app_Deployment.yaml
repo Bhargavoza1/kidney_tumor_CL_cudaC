@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: react-app
-        image: test1repo.azurecr.io/react_app:67  # Replace with your image name
+        image: test1repo.azurecr.io/react_app:${{ github.run_number }}  # Replace with your image name
         ports:
         - containerPort: 3000
         resources:
