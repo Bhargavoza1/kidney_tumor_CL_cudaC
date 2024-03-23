@@ -111,10 +111,10 @@ jobs:
             az account set --subscription ${{ secrets.AZURE_SUBSCRIPTION_ID }}
             az aks get-credentials --resource-group my_test --name myAKSCluster --overwrite-existing
       
-      - name: Replace placeholders in Kubernetes YAML files
-        run: |
-          cd k8s
-          sed -i "s/\${GITHUB_RUN_NUMBER}/${GITHUB_RUN_NUMBER}/g" react_app_Deployment.yaml
+      #- name: Replace placeholders in Kubernetes YAML files
+      #  run: |
+      #    cd k8s
+      #    sed -i "s/\${GITHUB_RUN_NUMBER}/${GITHUB_RUN_NUMBER}/g" react_app_Deployment.yaml
 
       - uses: azure/setup-kubectl@v3
       - uses: azure/aks-set-context@v2.0
