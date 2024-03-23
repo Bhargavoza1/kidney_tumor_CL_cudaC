@@ -116,6 +116,12 @@ jobs:
           cd k8s
           sed -i "s/\${GITHUB_RUN_NUMBER}/${GITHUB_RUN_NUMBER}/g" react_app_Deployment.yaml
 
+      - uses: azure/setup-kubectl@v3
+      - uses: azure/aks-set-context@v2.0
+        with:
+          resource-group: my_test
+          cluster-name: myAKSCluster
+
       - name: Deploy to AKS 
         run: |
             cd k8s
