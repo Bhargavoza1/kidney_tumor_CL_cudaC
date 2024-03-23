@@ -55,7 +55,8 @@ jobs:
         #  docker push test1repo.azurecr.io/react_app:${GITHUB_RUN_NUMBER}
  
  
-      - name: Check if AKS Cluster exists
+      - id: check-aks
+        name: Check if AKS Cluster exists
         uses: azure/CLI@v2
         with:
           azcliversion: latest
@@ -77,7 +78,7 @@ jobs:
             fi
 
       - name: Print name
-        run: echo "checking value $steps.Check_if_AKS_Cluster_exists.outputs.cluster_exists"
+        run: echo "checking value ${{steps.check-aks.outputs.cluster_exists}}"
    
 
       - name: Create AKS Cluster
