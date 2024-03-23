@@ -59,7 +59,7 @@ jobs:
         with:
           azcliversion: latest
           inlineScript: |
-            result=$(az aks show --resource-group my_test --name myAKSCluster --query 'id' 2>&1)
+            result=$(az aks show --resource-group my_test --name myAKSCluster --query 'id' 2>/dev/null | jq -e '.id' || true)
             exit_code=$?
             if [ $exit_code -ne 0 ]; then
               echo "Error executing az aks show command. Exit code: $exit_code"
@@ -67,7 +67,7 @@ jobs:
               echo "::error::Error executing az aks show command. Exit code: $exit_code"
               exit $exit_code
             fi
-            
+
             if [[ -z "$result" || "$result" == *"does not exist"* ]]; then
               echo "::set-output name=cluster_exists::false"
             else
