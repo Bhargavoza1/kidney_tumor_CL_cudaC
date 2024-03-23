@@ -68,7 +68,7 @@ jobs:
               exit $exit_code
             fi
 
-            if [[ -z "$result" || "$result" == *"does not exist"* ]]; then
+            if [[ -z "$result" || "$result" == *"ResourceNotFound"* ]]; then
               echo "::set-output name=cluster_exists::false"
             else
               echo "::set-output name=cluster_exists::true"
