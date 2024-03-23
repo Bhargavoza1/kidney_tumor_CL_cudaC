@@ -121,5 +121,5 @@ jobs:
         with:
           azcliversion: latest
           inlineScript: |
-          cd k8s
-          kubectl apply -f react_app_Deployment.yaml -f react_app_Service.yaml
+            cd k8s
+            kubectl apply -f react_app_Deployment.yaml -f react_app_Service.yaml
