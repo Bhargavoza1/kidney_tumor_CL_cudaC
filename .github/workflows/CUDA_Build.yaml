@@ -117,9 +117,6 @@ jobs:
           sed -i "s/\${GITHUB_RUN_NUMBER}/${GITHUB_RUN_NUMBER}/g" react_app_Deployment.yaml
 
       - name: Deploy to AKS 
-        uses: azure/setup-kubectl@v4
-        with:
-          azcliversion: latest
-          inlineScript: |
+        run: |
             cd k8s
             kubectl apply -f react_app_Deployment.yaml -f react_app_Service.yaml
