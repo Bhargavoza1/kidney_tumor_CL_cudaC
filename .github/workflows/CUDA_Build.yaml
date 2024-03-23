@@ -78,7 +78,10 @@ jobs:
             fi
 
       - name: Print name
+        if: ${{steps.check-aks.outputs.cluster_exists}} != 'true'
         run: echo "checking value ${{steps.check-aks.outputs.cluster_exists}}"
+        else:
+          echo "AKS Cluster already exists, skipping creation."
    
 
       - name: Create AKS Cluster
@@ -87,8 +90,10 @@ jobs:
         with:
           azcliversion: latest
           inlineScript: |
-            az aks create --resource-group my_test --name myAKSCluster --node-count 1  
-            
+            az aks create --resource-group my_test --name myAKSCluster --node-count 1  --generate-ssh-keys
+        else:
+          echo "AKS Cluster already exists, skipping creation."
+
       - name: Get AKS Credentials
         uses: azure/CLI@v2
         with:
