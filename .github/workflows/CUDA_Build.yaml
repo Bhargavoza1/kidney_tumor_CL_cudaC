@@ -109,9 +109,6 @@ jobs:
         with:
           azcliversion: latest
           inlineScript: |
-            AKS_ID=$(az aks show --resource-group my_test --name myAKSCluster --query id -o tsv)
-            az role assignment create --role "AcrPull" --assignee ${{ secrets.AZURE_CLIENT_ID }} --scope $AKS_ID
-            az aks update --resource-group my_test --name myAKSCluster --attach-acr test1repo
             az account set --subscription ${{ secrets.AZURE_SUBSCRIPTION_ID }}
             az aks get-credentials --resource-group my_test --name myAKSCluster --overwrite-existing
       
