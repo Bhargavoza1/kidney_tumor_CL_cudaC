@@ -98,8 +98,6 @@ jobs:
               az aks create --resource-group my_test --name myAKSCluster --node-count 1  --generate-ssh-keys  
 
               AKS_ID=$(az aks show --resource-group my_test --name myAKSCluster --query id -o tsv)
-	            
-
  	            az role assignment create --assignee $AKS_ID --scope $ACR_ID --role AcrPull
 	            az aks update --resource-group my_test --name myAKSCluster --attach-acr test1repo
             else
