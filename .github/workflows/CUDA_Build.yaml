@@ -123,7 +123,7 @@ jobs:
       - name: Replace placeholders in Kubernetes YAML files
         run: |
           cd k8s
-          echo "imageTag=${{GITHUB_RUN_NUMBER}}" >> $GITHUB_ENV
+          echo "imageTag=${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
           kubectl set image -f deployment.template.yml  react-app=test1repo.azurecr.io/react_app:$imageTag --local -o yaml > react_app_Deployment.yaml
         #  sed -i 's|${{ github.run_number }}|'"$GITHUB_RUN_NUMBER"'|g' react_app_Deployment.yaml
         #  echo "github.run_number ${{ github.run_number }} "
