@@ -82,11 +82,19 @@ jobs:
    
 
       - name: Create AKS Cluster
-        if: steps.Check_if_AKS_Cluster_exists.outputs.cluster_exists == 'false'
-        run: az aks create --resource-group my_test --name myAKSCluster --node-count 1 --enable-addons monitoring --generate-ssh-keys
+        if: ${{steps.check-aks.outputs.cluster_exists}} == 'false'
+        uses: azure/CLI@v2
+        with:
+          azcliversion: latest
+          inlineScript: |
+            az aks create --resource-group my_test --name myAKSCluster --node-count 1 --enable-addons monitoring --generate-ssh-keys
 
       - name: Get AKS Credentials
-        run: az aks get-credentials --resource-group my_test --name myAKSCluster --overwrite-existing
+        uses: azure/CLI@v2
+        with:
+          azcliversion: latest
+          inlineScript: |
+            az aks get-credentials --resource-group my_test --name myAKSCluster --overwrite-existing
       
       - name: Replace placeholders in Kubernetes YAML files
         run: |
