@@ -82,13 +82,13 @@ jobs:
    
 
       - name: Create AKS Cluster
-        if: ${{steps.check-aks.outputs.cluster_exists}} == 'false'
+        if: ${{steps.check-aks.outputs.cluster_exists}} != 'true'
         uses: azure/CLI@v2
         with:
           azcliversion: latest
           inlineScript: |
-            az aks create --resource-group my_test --name myAKSCluster --node-count 1 --enable-addons monitoring --generate-ssh-keys
-
+            az aks create --resource-group my_test --name myAKSCluster --node-count 1  
+            
       - name: Get AKS Credentials
         uses: azure/CLI@v2
         with:
