@@ -80,8 +80,7 @@ jobs:
       - name: Print name
         if: ${{steps.check-aks.outputs.cluster_exists}} != 'true'
         run: echo "checking value ${{steps.check-aks.outputs.cluster_exists}}"
-        else:
-          echo "AKS Cluster already exists, skipping creation."
+ 
    
 
       - name: Create AKS Cluster
