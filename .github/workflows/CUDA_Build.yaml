@@ -113,8 +113,7 @@ jobs:
       - name: Replace placeholders in Kubernetes YAML files
         run: |
           cd k8s
-          sed -i "s/\${{ Tag }}/${GITHUB_RUN_NUMBER}/g" react_app_Deployment.yaml
-          echo "getting tag ${{ Tag }}"
+          sed -i "s/\${{GITHUB_RUN_NUMBER}}/${GITHUB_RUN_NUMBER}/g" react_app_Deployment.yaml 
 
       - name: Deploy to AKS
         run: kubectl apply -f ./k82/react_app_Deployment.yaml -f ./k82/react_app_Service.yaml
