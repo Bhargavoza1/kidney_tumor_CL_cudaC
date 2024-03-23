@@ -94,9 +94,10 @@ jobs:
           azcliversion: latest
           inlineScript: |
             if [ "${{steps.check-aks.outputs.cluster_exists}}" != "true" ]; then
-              az aks create --resource-group my_test --name myAKSCluster --node-count 1  --generate-ssh-keys --attach-acr test1repo
+              az aks create --resource-group my_test --name myAKSCluster --node-count 1  --generate-ssh-keys  
               AKS_ID=$(az aks show -g myResourceGroup -n myManagedCluster --query id -o tsv)
               az role assignment create --role "Azure Kubernetes Service RBAC Admin" --assignee ${{ secrets.AZURE_CLIENT_ID }} --scope $AKS_ID
+              az aks update --resource-group my_test --name myAKSCluster --attach-acr test1repo
             else
               echo "AKS cluster is present"
               ls
