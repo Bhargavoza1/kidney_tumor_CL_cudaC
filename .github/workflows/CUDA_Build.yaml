@@ -77,9 +77,13 @@ jobs:
               echo "cluster_exists=true" >> $GITHUB_OUTPUT
             fi
 
-      - name: Print name
-        if: ${{steps.check-aks.outputs.cluster_exists}} != 'true'
-        run: echo "checking value ${{steps.check-aks.outputs.cluster_exists}}"
+      - name: Print name 
+        run: |
+          if [ "${{steps.check-aks.outputs.cluster_exists}}" != "true" ]; then
+            echo "checking value ${{steps.check-aks.outputs.cluster_exists}}"
+          else
+            echo "heyyyy"
+          fi
  
    
 
