@@ -14,16 +14,16 @@ spec:
     spec:
       containers:
       - name: react-app
-        image: test1repo.azurecr.io/react_app:1  # Replace with your image name
+        image: test1repo.azurecr.io/react_app:${{ github.run_number }}  # Replace with your image name
         ports:
         - containerPort: 3000
         resources:
           limits:
             cpu: "1"
             memory: "512Mi"  # Adjust according to your application needs
-      #  env:
-      #    - name: REACT_APP_BACKEND_URL
-      #      value: "http://nn-backend:8080"  # Set the backend URL
+        env:
+          - name: REACT_APP_BACKEND_URL
+            value: "http://nn-backend:8080"  # Set the backend URL
       dnsPolicy: ClusterFirst
       restartPolicy: Always
 #kubectl port-forward service/react-app-service 8080:80
