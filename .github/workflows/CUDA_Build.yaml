@@ -62,7 +62,7 @@ jobs:
           azcliversion: latest
           inlineScript: |
             set -x
-             result=$(az aks show --resource-group my_test --name myAKSCluster 2>/dev/null | jq -r '.id')
+            result=$(az aks show --resource-group my_test --name myAKSCluster 2>/dev/null | jq -r '.id')
             exit_code=$?
             if [ $exit_code -ne 0 ]; then
               echo "Error executing az aks show command. Exit code: $exit_code"
@@ -88,12 +88,17 @@ jobs:
    
 
       - name: Create AKS Cluster
-        if: ${{steps.check-aks.outputs.cluster_exists}} != 'true'
         uses: azure/CLI@v2
         with:
           azcliversion: latest
           inlineScript: |
-            az aks create --resource-group my_test --name myAKSCluster --node-count 1  --generate-ssh-keys
+            if [ "${{steps.check-aks.outputs.cluster_exists}}" != "true" ]; then
+              az aks create --resource-group my_test --name myAKSCluster --node-count 1  --generate-ssh-keys
+            else
+              echo "AKS cluster is present"
+            fi
+ 
+            
  
 
       - name: Get AKS Credentials
