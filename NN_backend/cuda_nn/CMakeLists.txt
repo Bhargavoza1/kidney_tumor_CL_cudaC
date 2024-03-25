@@ -5,7 +5,7 @@ project(cuda_nn)
 find_package(CUDA REQUIRED)
 find_package(OpenCV REQUIRED)
 set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS})
-list(APPEND CUDA_NVCC_FLAGS -arch=sm_89)
+list(APPEND CUDA_NVCC_FLAGS -arch=sm_86)
 
 # Find OpenCV package
 

@@ -1,8 +1,8 @@
 
-FROM nvidia/cuda:12.3.2-devel-ubuntu22.04
-
+#FROM nvidia/cuda:12.3.2-devel-ubuntu22.04
+FROM nvidia/cuda:12.2.2-devel-ubuntu22.04
  
-  
+ENV DEBIAN_FRONTEND=noninteractive  
 WORKDIR /app
 
 
