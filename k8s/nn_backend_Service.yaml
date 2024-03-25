@@ -7,6 +7,6 @@ spec:
     app: nn-backend
   ports:
     - protocol: TCP
-      port: 80
+      port: 8082
       targetPort: 8080
-  type: LoadBalancer
+  type: ClusterIP  # Change to ClusterIP

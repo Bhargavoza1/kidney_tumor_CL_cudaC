@@ -12,9 +12,10 @@ spec:
       labels:
         app: react-app
     spec:
+      dnsPolicy: ClusterFirst 
       containers:
       - name: react-app
-        image: test1repo.azurecr.io/react_app:101 # Replace with your image name
+        image: test1repo.azurecr.io/react_app:100 # Replace with your image name
         ports:
         - containerPort: 3000
         resources:
@@ -23,9 +24,8 @@ spec:
             memory: "512Mi"  # Adjust according to your application needs
         env:
           - name: REACT_APP_BACKEND_URL
-            value: "http://nn-backend-service"  # Set the backend URL
+            value: "http://nn-backend-service.default.svc.cluster.local:8082"  # Set the backend URL
         tty: true
-        stdin: true
-      dnsPolicy: ClusterFirst
+        stdin: true 
       restartPolicy: Always
 #kubectl port-forward service/react-app-service 8080:80
