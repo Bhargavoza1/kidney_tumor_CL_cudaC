@@ -24,7 +24,7 @@ spec:
             memory: "512Mi"  # Adjust according to your application needs
         env:
           - name: REACT_APP_BACKEND_URL
-            value: "http://nn-backend-service.default.svc.cluster.local:8082"  # Set the backend URL
+            value: "http://nn-backend-service:80"  # Set the backend URL
         tty: true
         stdin: true 
       restartPolicy: Always
