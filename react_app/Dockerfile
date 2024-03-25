@@ -11,7 +11,7 @@ COPY package*.json ./
 RUN npm install
 
 # Install react-scripts globally
-#RUN npm install react-scripts@latest -g
+RUN npm install react-scripts@latest -g
 
 # Copy the remaining application code to the working directory
 COPY . .

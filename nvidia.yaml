@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nvidia-smi-pod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nvidia-smi
+  template:
+    metadata:
+      labels:
+        app: nvidia-smi
+    spec:
+      containers:
+      - name: nvidia-smi-container
+        image: nvidia/cuda:11.6.1-base-ubuntu20.04
+        command: ["bash", "-c", "nvidia-smi && tail -f /dev/null"]
+        resources:
+          limits:
+            nvidia.com/gpu: 1
+          requests:
+            nvidia.com/gpu: 1 
+ 
+#kubectl logs <podname>
