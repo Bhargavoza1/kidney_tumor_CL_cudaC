@@ -75,9 +75,7 @@ jobs:
           else
             echo "heyyyy"
           fi
- 
-   
-
+      
       - name: Create AKS Cluster
         uses: azure/CLI@v2
         with:
@@ -90,7 +88,7 @@ jobs:
               ls
               pwd
             fi
-            
+
       - name: Get AKS Credentials
         uses: azure/CLI@v2
         with:
