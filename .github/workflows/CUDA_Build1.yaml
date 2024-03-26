@@ -114,7 +114,7 @@ jobs:
               cd k8s
               kubectl create namespace gpu-resources
               kubectl apply -f nvidia-device-plugin-ds.yaml
-            else
+            fi
            
             
       - name: Replace placeholders in Kubernetes YAML files
