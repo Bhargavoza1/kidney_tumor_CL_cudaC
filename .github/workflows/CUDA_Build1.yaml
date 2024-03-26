@@ -129,8 +129,5 @@ jobs:
             kubectl apply -f nn_backend_Service.yaml -f nn_backend_Deployment.yaml
             kubectl apply -f react_app_Deployment.yaml -f react_app_Service.yaml
       
-      - name: react app ip 
-        run: |
-            cd k8s
-            kubectl get svc react-app-service
+ 
 
