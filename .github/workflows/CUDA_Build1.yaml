@@ -67,16 +67,6 @@ jobs:
               echo "cluster_exists=true" >> $GITHUB_OUTPUT
             fi
 
-      - name: Print name 
-        run: |
-          if [ "${{steps.check-aks.outputs.cluster_exists}}" != "true" ]; then
-            echo "checking value ${{steps.check-aks.outputs.cluster_exists}}"
-          else
-            echo "heyyyy"
-          fi
- 
-   
-
       - name: Create AKS Cluster
         uses: azure/CLI@v2
         with:
@@ -86,8 +76,6 @@ jobs:
             az aks create --resource-group my_test --name myAKSCluster --node-count 1   --node-vm-size Standard_NV6ads_A10_v5 --enable-cluster-autoscaler --min-count 1 --max-count 1 --max-pods 30 --location centralindia --kubernetes-version 1.28.5  --generate-ssh-keys  
             else
               echo "AKS cluster is present"
-              ls
-              pwd
             fi
  
       - name: Get AKS Credentials
