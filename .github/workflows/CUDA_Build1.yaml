@@ -110,9 +110,12 @@ jobs:
 
       - name: Deploy NVIDIA DaemonSet to AKS 
         run: |
-            cd k8s
-            kubectl create namespace gpu-resources
-            kubectl apply -f nvidia-device-plugin-ds.yaml
+            if [ "${{steps.check-aks.outputs.cluster_exists}}" != "true" ]; then 
+              cd k8s
+              kubectl create namespace gpu-resources
+              kubectl apply -f nvidia-device-plugin-ds.yaml
+            else
+           
             
       - name: Replace placeholders in Kubernetes YAML files
         run: |
