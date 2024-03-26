@@ -90,7 +90,7 @@ jobs:
               ls
               pwd
             fi
- 
+            
       - name: Get AKS Credentials
         uses: azure/CLI@v2
         with:
