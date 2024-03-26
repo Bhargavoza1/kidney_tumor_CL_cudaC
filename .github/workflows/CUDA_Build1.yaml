@@ -18,14 +18,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    #services:
-      #nn_backend:
-      #  image: nvidia/cuda:12.3.2-devel-ubuntu22.04
-      #  ports:
-      #    - "8080:8080"
-      #  options: --privileged  # Required for GPU access
-      #  env:
-      #    NVIDIA_VISIBLE_DEVICES: all
+    services:
+      nn_backend:
+        image: nvidia/cuda:12.2.2-devel-ubuntu22.04
+        ports:
+          - "8080:8080"
+        options: --privileged  # Required for GPU access
+        env:
+          NVIDIA_VISIBLE_DEVICES: all
 
     steps:
       - name: Checkout repository
@@ -45,10 +45,10 @@ jobs:
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
 
-     # - name: Build and deploy nn_backend
-     #   run: | 
-     #     docker build ./NN_backend -t test1repo.azurecr.io/nn_backend:${GITHUB_RUN_NUMBER}
-     #     docker push test1repo.azurecr.io/nn_backend:${GITHUB_RUN_NUMBER}
+      - name: Build and deploy nn_backend
+        run: | 
+          docker build ./NN_backend -t test1repo.azurecr.io/nn_backend:${GITHUB_RUN_NUMBER}
+          docker push test1repo.azurecr.io/nn_backend:${GITHUB_RUN_NUMBER}
 
       - name: Build and deploy react_app
         run: |
@@ -62,7 +62,6 @@ jobs:
         with:
           azcliversion: latest
           inlineScript: |
-            set -x
             result=$(az aks show --resource-group my_test --name myAKSCluster 2>/dev/null | jq -r '.id')
             exit_code=$?
             if [ $exit_code -ne 0 ]; then
@@ -94,16 +93,13 @@ jobs:
           azcliversion: latest
           inlineScript: |
             if [ "${{steps.check-aks.outputs.cluster_exists}}" != "true" ]; then 
-              az aks create --resource-group my_test --name myAKSCluster --node-count 1  --generate-ssh-keys  
+            az aks create --resource-group my_test --name myAKSCluster --node-count 1   --node-vm-size Standard_NV6ads_A10_v5 --enable-cluster-autoscaler --min-count 1 --max-count 1 --max-pods 30 --location centralindia --kubernetes-version 1.28.5  --generate-ssh-keys  
             else
               echo "AKS cluster is present"
               ls
               pwd
             fi
  
-            
- 
-
       - name: Get AKS Credentials
         uses: azure/CLI@v2
         with:
@@ -111,8 +107,8 @@ jobs:
           inlineScript: |
             if [ "${{steps.check-aks.outputs.cluster_exists}}" != "true" ]; then
               AKS_ID=$(az aks show --resource-group my_test --name myAKSCluster --query id -o tsv)
-              az role assignment create --role "AcrPull" --assignee ${{ secrets.AZURE_CLIENT_ID }} --scope $AKS_ID
-              az aks update --resource-group my_test --name myAKSCluster --attach-acr test1repo
+              az role assignment create --role "AcrPull" --assignee ${{ secrets.AZURE_CLIENT_ID }} --scope $AKS_ID > /dev/null
+              az aks update --resource-group my_test --name myAKSCluster --attach-acr test1repo > /dev/null
             fi
             az account set --subscription ${{ secrets.AZURE_SUBSCRIPTION_ID }}
             az aks get-credentials --resource-group my_test --name myAKSCluster --overwrite-existing
@@ -126,15 +122,25 @@ jobs:
           cluster-name: myAKSCluster
 
 
+      - name: Deploy NVIDIA DaemonSet to AKS 
+        run: |
+            cd k8s
+            kubectl create namespace gpu-resources
+            kubectl apply -f nvidia-device-plugin-ds.yaml
+            
       - name: Replace placeholders in Kubernetes YAML files
         run: |
           cd k8s 
           sed -i "s|image: test1repo.azurecr.io/react_app:\$imageTag|image: test1repo.azurecr.io/react_app:${GITHUB_RUN_NUMBER}|" react_app_Deployment.yaml
+          sed -i "s|image: test1repo.azurecr.io/nn_backend:\$imageTag|image: test1repo.azurecr.io/nn_backend:${GITHUB_RUN_NUMBER}|" nn_backend_Deployment.yaml
         #  kubectl set image -f deployment.template.yml  react-app=test1repo.azurecr.io/react_app:$imageTag --local -o yaml > react_app_Deployment.yaml
         #  sed -i 's|${{ github.run_number }}|'"$GITHUB_RUN_NUMBER"'|g' react_app_Deployment.yaml
         #  echo "github.run_number ${{ github.run_number }} "
 
-      - name: Deploy to AKS 
+      - name: Deploy APP to AKS 
         run: |
             cd k8s
+            kubectl apply -f nn_backend_Service.yaml -f nn_backend_Deployment.yaml
             kubectl apply -f react_app_Deployment.yaml -f react_app_Service.yaml
+            
+
