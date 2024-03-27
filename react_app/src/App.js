@@ -21,6 +21,7 @@ function App() {
       const imageData = reader.result.split(',')[1]; // Extract base64 data
       try {
         const url = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8080';
+        console.log("process.env.REACT_APP_BACKEND_URL  " , process.env.REACT_APP_BACKEND_URL ) ;
 
         console.log ("process.env.NODE_ENV : " ,url);
         const response = await axios.post(
