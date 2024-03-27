@@ -29,8 +29,6 @@ services:
       - "3000:3000"
     depends_on:
       - nn_backend
-    environment:
-      REACT_APP_BACKEND_URL: "" 
 #docker-compose -f docker-compose.build.yml build
 #to test locally 
 #docker-compose -f docker-compose.build.yml up
