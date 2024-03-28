@@ -8,8 +8,7 @@ env:
   CLUSTER_NAME: "myAKSCluster"
   ACR_NAME: "test1repo"
   NODE_COUNT: 1
-  NODE_VM_SIZE: "Standard_NV6ads_A10_v5"
-  ENABLE_CLUSTER_AUTOSCALER: true
+  NODE_VM_SIZE: "Standard_NV6ads_A10_v5" 
   MIN_COUNT: 1
   MAX_COUNT: 1
   MAX_PODS: 30
@@ -91,7 +90,7 @@ jobs:
                           --name $CLUSTER_NAME \
                           --node-count $NODE_COUNT \
                           --node-vm-size $NODE_VM_SIZE \
-                          --enable-cluster-autoscaler $ENABLE_CLUSTER_AUTOSCALER \
+                          --enable-cluster-autoscaler \
                           --min-count $MIN_COUNT \
                           --max-count $MAX_COUNT \
                           --max-pods $MAX_PODS \
