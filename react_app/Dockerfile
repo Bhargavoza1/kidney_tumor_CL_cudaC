@@ -1,5 +1,5 @@
 # Use an official Node.js image as the base image
-FROM node:14-alpine
+FROM node:latest
 
 # Set the working directory in the container
 WORKDIR /app
@@ -9,18 +9,16 @@ COPY package*.json ./
 
 # Install dependencies
 RUN npm install
-
-# Install react-scripts globally
-RUN npm install react-scripts@latest -g
+RUN npm install -g serve
 
 # Copy the remaining application code to the working directory
 COPY . .
 
 # Build the React app for production
-#RUN npm run build
+RUN npm run build
 
 # Expose port 3000
 EXPOSE 3000
 
 # Command to run the application
-CMD ["npm", "start"]
+CMD ["serve", "-s", "build"]
