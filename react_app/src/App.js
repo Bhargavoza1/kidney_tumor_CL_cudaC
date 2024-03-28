@@ -21,7 +21,7 @@ function App() {
     reader.onload = async () => {
       const imageData = reader.result.split(',')[1]; // Extract base64 data
       try {
-        const url =  process.env.REACT_APP_BACKEND_URL ? '/api/predict' : 'http://localhost:8080/api/predict'
+        const url =  process.env.REACT_APP_BACKEND_URL ? '/api/predict' : 'http://localhost:8080/api/predict';
         //const url =   'http://localhost:8080/api/predict';
         //console.log("urld : " , process.env.DEV);
         const response = await axios.post(
