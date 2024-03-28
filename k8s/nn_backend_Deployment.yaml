@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: nn-backend
-        image: test1repo.azurecr.io/nn_backend:$imageTag  # Replace with your image name
+        image: $acr_name.azurecr.io/nn_backend:$imageTag  # Replace with your image name
         #command: ["bash", "-c", "nvidia-smi && tail -f /dev/null"]
         ports:
         - containerPort: 8080

@@ -15,7 +15,7 @@ spec:
       dnsPolicy: ClusterFirst 
       containers:
       - name: react-app
-        image: test1repo.azurecr.io/react_app:$imageTag # Replace with your image name
+        image: $acr_name.azurecr.io/react_app:$imageTag # Replace with your image name
         ports:
         - containerPort: 3000
         resources:
