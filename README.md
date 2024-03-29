@@ -17,12 +17,11 @@ Welcome to the repository for my cutting-edge kidney tumor classification system
 
 # Neural network architecture
 
+<p align="center">
+  <img src="./gitresource/image_classification.png" />
+</p>
+
 The image shows a neural network architecture for image classification. The network takes an input image of size 225x225 and outputs a probability distribution over the possible classes. The network consists of several layers, including convolutional layers, ReLU activation layers, max-pooling layers, batch normalization layers, a flatten layer, linear layers, and a sigmoid activation layer.
 
 The convolutional layers extract features from the input image. The ReLU activation layers introduce non-linearity into the network. The max pooling layers downsample the feature maps. The batch normalization layers normalize the activations. The flatten layer converts the feature maps into a single vector. The linear layers learn to classify the input image based on this vector. The sigmoid activation layer outputs a probability distribution over the possible classes.
 
-This network architecture is a common choice for image classification tasks. It is effective because it can learn to extract features from the input image that are relevant to the classification task. The network is also relatively efficient to train and can be used to classify images with high accuracy.
-
-<p align="center">
-  <img src="./gitresource/image_classification.png" />
-</p>
