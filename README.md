@@ -36,3 +36,14 @@ The image shows a neural network architecture for image classification. The netw
 
 The convolutional layers extract features from the input image. The ReLU activation layers introduce non-linearity into the network. The max pooling layers downsample the feature maps. The batch normalization layers normalize the activations. The flatten layer converts the feature maps into a single vector. The linear layers learn to classify the input image based on this vector. The sigmoid activation layer outputs a probability distribution over the possible classes.
 
+# Compilation
+
+<p align="center">
+  <img src="./gitresource/compilation_flow.png" />
+</p>
+
+1. C++ Compilation: Initially, the CMake configuration compiles the C++ sources and creates a shared library (.so file) named app using CUDA for GPU acceleration and OpenCV for computer vision functionalities. This library contains the CUDA-accelerated neural network components.
+
+2. Go Compilation: After the C++ compilation is completed, the CMake configuration invokes the Go compiler to compile the Go source file (app.go). The resulting executable is named backend.
+
+3. Linking C++ Library with Go Executable: During the Go compilation step, the Go program (backend) is linked with the previously compiled C++ shared library (app.so). This linking allows the Go program to utilize the functionalities provided by the C++ library.
