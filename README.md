@@ -47,3 +47,20 @@ The convolutional layers extract features from the input image. The ReLU activat
 2. Go Compilation: After the C++ compilation is completed, the CMake configuration invokes the Go compiler to compile the Go source file (app.go). The resulting executable is named backend.
 
 3. Linking C++ Library with Go Executable: During the Go compilation step, the Go program (backend) is linked with the previously compiled C++ shared library (app.so). This linking allows the Go program to utilize the functionalities provided by the C++ library.
+
+# How to run this?
+
+## locally 
+Locally you need docker and docker compose. And Nvidia GPU with cuda v12.2
+
+```
+docker-compose -f docker-compose.build.yml build
+```
+you have to wait.
+
+```
+docker-compose -f docker-compose.build.yml up
+```
+
+web app will start on http://localhost:3000/. However, you still need to wait for the completion of the neural network training process.
+you can find kidney images inside " ./NN_backend/cuda_nn/kidney-ct-scan-image ".
