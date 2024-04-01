@@ -42,7 +42,7 @@ The convolutional layers extract features from the input image. The ReLU activat
   <img src="./gitresource/compilation_flow.png" />
 </p>
 
-note: For learning purposes, I am building OpenCV from the source. If you want you can install  it by ** apt-get install libopencv-dev **
+note: For learning purposes, I am building OpenCV from the source. If you want you can install  it by **apt-get install libopencv-dev**
 
 1. C++ Compilation: Initially, the CMake configuration compiles the C++ sources and creates a shared library (.so file) named app using CUDA for GPU acceleration and OpenCV for computer vision functionalities. This library contains the CUDA-accelerated neural network components.
 
