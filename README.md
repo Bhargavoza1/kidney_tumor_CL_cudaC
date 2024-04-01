@@ -18,12 +18,12 @@ Welcome to the repository for my cutting-edge kidney tumor classification system
 1. C++ Programming
 2. CUDA Programming
 3. Neural Networks (CNN2d, maxpool2d, liner, relu, sigmoid, batch normalization, flatten layer)
-5. OpenCV
-6. Server-side Development (basic golang)
-7. Frontend Development (basic react.js)
-8. Containerization and Orchestration (docker and kubernetes)
+4. OpenCV
+5. Server-side Development (basic golang)
+6. Frontend Development (basic react.js)
+7. Containerization and Orchestration (docker and kubernetes)
+8. Azure
 9. Continuous Integration/Continuous Deployment (Github actions)
-10. Azure
 
     
 # Neural network architecture
