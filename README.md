@@ -66,3 +66,22 @@ docker-compose -f docker-compose.build.yml up
 
 web app will start on http://localhost:3000/. However, you still need to wait for the completion of the neural network training process.
 you can find kidney images inside " ./NN_backend/cuda_nn/kidney-ct-scan-image ".
+
+## Azure
+I've developed a comprehensive CI/CD pipeline using GitHub Actions to seamlessly deploy applications onto the Azure cloud.
+workflow dir "./github/workflows/"
+
+### Required credentials
+1. AZURE_CLIENT_ID
+2. AZURE_TENANT_ID
+3. AZURE_SUBSCRIPTION_ID
+4. ACR_USERNAME
+5. ACR_PASSWORD
+
+Please refer to the following link for instructions on obtaining the necessary credentials. 
+
+[azure-login#workflow-examples](https://github.com/marketplace/actions/azure-login#workflow-examples)
+ 
+I used a service principal to enable authentication, and then employed OIDC methods for the login process.
+
+
