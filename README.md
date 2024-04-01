@@ -88,3 +88,9 @@ In Azure, I created an application within the "App Registrations" section and as
 
 And created a Container registry to push docker images. 
 
+CICD pipeline 
+
+<p align="center">
+  <img src="./gitresource/cicd.png" />
+</p>
+
