@@ -84,7 +84,7 @@ Please refer to the following link for instructions on obtaining the necessary c
  
 I used a service principal to enable authentication, and then employed OIDC methods for the login process.
 
-In Azure, I created an application within the "App Registrations" section and assigned it the owner role with constrained permissions. Specifically, this application is only permitted to assign the AcrPull role to other resources.
+In Azure, I created an application within the "App Registrations" section and assigned it the owner role with constrained permissions. Specifically, this application is only permitted to assign the AcrPull role to other resources like AKS.
 
 And created a Container registry to push docker images. 
 
