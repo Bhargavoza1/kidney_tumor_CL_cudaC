@@ -74,9 +74,9 @@ add_custom_command(
 add_custom_target(BuildGoProgram ALL DEPENDS backend)
 
 # Add the compiled executable as a target
-add_executable(GoExample IMPORTED GLOBAL)
-set_target_properties(GoExample PROPERTIES IMPORTED_LOCATION ${CMAKE_CURRENT_BINARY_DIR}/backend)
-add_dependencies(GoExample BuildGoProgram)
+#add_executable(GoExample IMPORTED GLOBAL)
+#set_target_properties(GoExample PROPERTIES IMPORTED_LOCATION ${CMAKE_CURRENT_BINARY_DIR}/backend)
+#add_dependencies(GoExample BuildGoProgram)
 
 # have to export build dir or dir of .so to run programme
 #export LD_LIBRARY_PATH=./:$LD_LIBRARY_PATH
