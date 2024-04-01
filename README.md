@@ -86,3 +86,5 @@ I used a service principal to enable authentication, and then employed OIDC meth
 
 In Azure, I created an application within the "App Registrations" section and assigned it the owner role with constrained permissions. Specifically, this application is only permitted to assign the AcrPull role to other resources.
 
+And created a Container registry to push docker images. 
+
