@@ -1,7 +1,8 @@
 # end to end kidney tumor classification with cuda C++ 
 
 [![Video](https://i.ytimg.com/vi/EOlm8V3Ajgo/maxresdefault.jpg)](https://www.youtube.com/watch?v=EOlm8V3Ajgo)
- 
+youtube : https://www.youtube.com/watch?v=EOlm8V3Ajgo
+
 Welcome to the repository for my cutting-edge kidney tumor classification system! This project represents the culmination of my efforts, leveraging CUDA C++ and OpenCV to develop a sophisticated neural network for accurately classifying kidney tumors. Through extensive work, I have created a system that seamlessly integrates with a Golang server and is complemented by a React-powered frontend. Deployment on Azure AKS with GitHub Actions ensures streamlined deployment and management.
 
 ## Features
